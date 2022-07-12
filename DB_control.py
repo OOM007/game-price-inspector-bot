@@ -6,15 +6,17 @@ class db_control:
         self.cursor = self.conn.cursor()
 
     def get_all_user(self):
-        pass
+        self.cursor.execute("SELECT * FROM 'subscribe_data'")
+        res = self.cursor.fetchall()
+        return res
 
     def get_user_game(self, user_id):
         self.cursor.execute("SELECT * FROM 'subscribe_data' WHERE chat_id=?", (user_id,))
         res = self.cursor.fetchone()
         return res
 
-    def add_user(self, chat_id, game_id):
-        self.cursor.execute("INSERT INTO subscribe_data(chat_id, game) VALUES(?, ?)", (chat_id, game_id))
+    def add_user(self, chat_id, game_id, game_name):
+        self.cursor.execute("INSERT INTO subscribe_data(chat_id, game, game_name) VALUES(?, ?, ?)", (chat_id, game_id, game_name, ))
         self.conn.commit()
 
     def update_game(self, chat_id, game_id):
@@ -23,3 +25,6 @@ class db_control:
 
     def close(self):
         self.conn.close()
+
+#db = db_control("gamechatdata.db")
+#print(len(db.get_all_user()))

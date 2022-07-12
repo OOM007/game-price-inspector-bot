@@ -124,5 +124,5 @@ def get_data(game_id):
     return game_data
 
 #print(get_data(294100))
-print(get_id("farming", 0))
+#print(get_id("farming", 0))
 #print(find_games("counter strice"))

@@ -1,8 +1,10 @@
 import os
 
+import asyncio
 import telebot
 from telebot import types
 
+from DB_control import db_control
 from text_controle import find_func
 
 bot = telebot.TeleBot(os.environ.get('TG_TOKEN'))
@@ -24,7 +26,6 @@ def help_command(m):
 
 @bot.message_handler(commands=['menu'])
 def my_button(m):
-    print(m.chat.id)
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     find_btn = types.KeyboardButton("find game")
     markup.add(find_btn)
@@ -35,11 +36,6 @@ def my_button(m):
 def find_game(m):
     print("chat id: ", m.chat.id)
     find_func(m, bot)
-
-
-async def test_start():
-    while True:
-        pass
 
 
 bot.polling(interval=0)
